@@ -7,6 +7,8 @@ export interface Product {
     category_id: number;
 }
 
+export type ProductWithCategory = Product & {category: string};
+
 export interface InventoryTypeItem {
     id: number;
     displayed_name: string;

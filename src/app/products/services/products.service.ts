@@ -8,13 +8,13 @@ export class ProductsService {
   private productsRequestCount = 0;
   private categoriesRequestCount = 0;
 
-  getProducts(): Observable<Product[]> {
+ getProducts(): Observable<Product[]> {
     return defer(() =>  {
       console.log('getProducts http');
-      // if (++this.productsRequestCount <= 2) {
-      //   console.error('Products request failed');
-      //   return throwError(new Error('Products request failed'));
-      // }
+      if (++this.productsRequestCount <= 2) {
+        console.error('Products request failed');
+        return throwError(new Error('Products request failed'));
+      }
       return of(PRODUCTS_DATA).pipe(delay(2000))
     });
   }
@@ -22,14 +22,13 @@ export class ProductsService {
   getCategories(): Observable<Category[]> {
     return defer(() =>  {
       console.log('getCategories http');
-      // if (++this.categoriesRequestCount <= 2) {
-      //   console.error('Categories request failed');
-      //   return throwError(new Error('Categories request failed'));
-      // }
+      if (++this.categoriesRequestCount <= 2) {
+        console.error('Categories request failed');
+        return throwError(new Error('Categories request failed'));
+      }
       return of(CATEGORIES).pipe(delay(2000))
     });
   }
-  
 }
 
 const CATEGORIES: Category[] = [

@@ -1,38 +1,44 @@
-<mat-card>
+<mat-card *ngIf="viewModel$ | async as vm">
   <mat-card-header>
     <mat-card-title>{{ title }}</mat-card-title>
-    <mat-card-subtitle>Выбрано: Дрель (электротовары)</mat-card-subtitle>
+    <mat-card-subtitle >Выбрано: {{ vm.subtitle }}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
 <div class="content-container">
   <mat-button-toggle-group [vertical]="true"  (change)="productSelectionChanged($event)" class="products-list">
-    <mat-button-toggle [value]="1">Товар 1</mat-button-toggle>
-    <mat-button-toggle [value]="2">Товар 2</mat-button-toggle>
+    <mat-button-toggle *ngFor="let product of vm.products" [value]="product.id">
+      {{product.name}}
+    </mat-button-toggle>
   </mat-button-toggle-group>
   <div class="details">
     <div class="details-item"> 
       <strong> Наименование: </strong> 
       <span>
+        {{ vm.selectedProduct?.name }} 
       </span>
       </div>
     <div class="details-item"> 
       <strong> Инвентарный номер: </strong> 
       <span>
+        {{ vm.selectedProduct?.inventory_no }} 
       </span>
       </div>
     <div class="details-item"> 
       <strong> Описание: </strong> 
       <span>
+        {{ vm.selectedProduct?.description }} 
       </span>
       </div>
     <div class="details-item"> 
       <strong> Цена: </strong> 
       <span>
+        {{ vm.selectedProduct?.price }} 
       </span>
       </div>
     <div class="details-item"> 
       <strong> Категория: </strong> 
       <span>
+        {{ vm.selectedProduct?.category }} 
       </span>
       </div>
   </div>
